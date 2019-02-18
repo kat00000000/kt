@@ -1,0 +1,28 @@
+@startuml
+
+loop 
+    main -> Item: 数値の入力
+    main <-- Item: 成功したかどうかの判定
+    main -> Item_list: itemの入力
+    main <-- Item_list:　成功したかどうかの判定
+end
+main -> Sum: 呼び出し
+Sum -> Item: 価値呼び出し
+Sum <-- Item: 価値取得
+Sum -> Item: 重さの呼び出し
+Sum <-- Item: 重さ取得
+
+Sum -> Sum: dpテーブル作成
+loop アイテムの個数まで回す(i)
+    loop ナップサックの重さまで回す(j)
+        alt jのループがItem_list[i]番目の重量を超えた時
+            alt item_list
+                
+            end
+        end
+    end
+end
+
+main <-- Sum: 最大値取得
+
+@enduml
