@@ -1,15 +1,13 @@
-# -*- coding: utf-8 -*-
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import numpy as np
+class Person:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
 
 
-font = {"family":"IPAexGothic"}
-mpl.rc('font', **font)
+Taro = Person("Taro", "Taro@python.com")
+Jiro = Person("Jiro", "Jiro@python.com")
 
-x = np.array([10, 20, 30, 40])
-label = ["沖田", "刑部姫", "アルトリア", "ジャンヌ"]
+Person_info = [Taro, Jiro]
 
-# 円グラフを描画
-plt.pie(x, labels=label, counterclock=False, startangle=90)
-plt.show()
+for member in Person_info:
+    print("Name:", member.name, " Email:", member.email)
