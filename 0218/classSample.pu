@@ -1,0 +1,33 @@
+@startuml
+class Knapsack{
+    -int capacity
+    +int capacity_get()
+    +int capacity_set(int input)
+}
+class Item{
+    -int value
+    -int weight
+    +int value_get()
+    +int value_set(int input)
+    +int weight_get()
+    +int weight_set(int input)
+}
+
+class Item_list{
+    -item item[]
+    -int list_len
+    +int item_list_get(int Item_number)
+    +int item_list_set(Item item)
+    +int list_len_get()
+    +int list_len_set(int Item_len)
+}
+
+class Sum{
+    -static int dp_table[100][100010]
+    -int maxSum
+    +int dp_table_get(int Item_number,int knapsack_weight)
+    +int dp_table_set(int Item_number,int knapsack_weight,int dp_max_weight)
+    +int maxSum_get()
+    +int maxSum_set(int Item_value)
+}
+@enduml

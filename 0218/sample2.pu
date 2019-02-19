@@ -1,0 +1,51 @@
+@startuml
+
+Actor "ユーザー" as User
+
+User -> main: ナップサックの容量、アイテムの個数の入力
+main -> Knapsack: ナップサックの容量の入力
+main <-- Knapsack: 成功したかどうかの判定
+main -> Item_list: アイテムリストの上限（アイテムの個数と同じ数値）の入力
+main <-- Item_list: 成功したかどうかの判定
+
+loop 入力されたアイテムの個数の数までループ
+    User -> main: ユーザーのアイテムデータ（value,weight）入力
+    main -> Item: 数値（value,weight）の入力
+    main <-- Item: 成功したかどうかの判定
+    main <- Item: 先ほど入れた数値を入れたItem型を持ってくる
+    main -> Item_list: 新しく作ったitemの入力
+    main <-- Item_list:　成功したかどうかの判定
+end
+main -> Sum: 呼び出し
+Sum -> Item: 価値呼び出し
+Sum <-- Item: 価値取得
+Sum -> Item: 重さの呼び出し
+Sum <-- Item: 重さ取得
+Sum -> Knapsack:ナップサックの容量
+Knapsack <-- Sum: 成功したかどうかの判定
+
+Sum -> Sum: dpテーブル作成
+loop アイテムの個数まで回す(i)
+    loop ナップサックの重さ+1まで回す(j+1)
+        alt jのループがItem_list[i]番目の数字以上の場合            
+            alt 今回のデータ(dp[i][j-Item_list[i].weight + Item_list[i].value)が前回のItem_list[i][j]のデータよりも多い場合
+                Sum -> Sum:次のdp[i + 1][j]に今回のデータを入れる
+            else 今回のデータが前回のデータよりも少ない場合
+                Sum -> Sum:次のdpテーブルに前回のデータを入れる
+            end
+        else jのループがitem_list[i]番目の数字以下の場合
+            Sum -> Sum:次のdpテーブルに前回のデータを入れる
+        end
+    end
+end
+
+loop ナップサックの重さ+1まで回す(i)
+    alt dpテーブル[item_list_len]行の中の数字が前回までの最大値(maxSum)よりも多い場合
+        Sum -> Sum: maxSum =　dp[item_list_len][i]
+    end
+end
+
+main <-- Sum: 最大値取得
+main -> User: 結果出力
+
+@enduml
