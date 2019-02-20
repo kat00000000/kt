@@ -1,4 +1,4 @@
-@startuml
+@startuml シーケンス図
 
 Actor "ユーザー" as User
 
@@ -17,12 +17,14 @@ loop 入力されたアイテムの個数の数までループ
     main <-- Item_list:　成功したかどうかの判定
 end
 main -> Sum: dp_max()呼び出し
-Sum -> Item: 価値呼び出し
-Sum <-- Item: 価値取得
-Sum -> Item: 重さの呼び出し
-Sum <-- Item: 重さ取得
-Sum -> Knapsack:ナップサックの容量
-Knapsack <-- Sum: 成功したかどうかの判定
+Sum -> Item_list: 価値呼び出し
+Sum <-- Item_list: 価値取得
+Sum -> item_list: 重さの呼び出し
+Sum <-- Item_list: 重さ取得
+Sum -> Item_list: アイテムリストの上限（アイテムの個数）の取得
+Sum <-- Item_list: 成功したかどうかの判定
+Sum -> Knapsack:ナップサックの容量呼び出し
+Knapsack --> Sum: 成功したかどうかの判定
 
 Sum -> Sum: dpテーブル作成
 
@@ -39,6 +41,8 @@ loop アイテムの個数まで回す(i)
         end
     end
 end
+
+Sum -> Sum: 最大値(maxSum)まで回す関数を呼ぶ。
 
 loop ナップサックの容量まで回す(i)
     alt dpテーブル[item_list_len]行の中の数字が前回までの最大値(maxSum)よりも多い場合

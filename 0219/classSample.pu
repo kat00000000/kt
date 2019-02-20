@@ -1,4 +1,4 @@
-@startuml
+@startuml　クラス図 
 class Knapsack{
     -int capacity
     +int capacity_get()
@@ -17,7 +17,9 @@ class Item_list{
     -item *item
     +int list_Create(int input)
     +int item_list_get(int Item_number)
-    +int item_list_set(Item item)
+
+    +int item_list_set(Item item,int Item_number)
+    +int item_length()
 }
 
 class Sum{
@@ -25,6 +27,7 @@ class Sum{
     -int maxSum
     -int dp_table_get(int Item_number,int knapsack_weight)
     -int dp_table_set(int Item_number,int knapsack_weight,int value)
+    +int maxSum_updata(int Item_number,int knapsack_weight)
     +int dp_max()
 }
 @enduml
