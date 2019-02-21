@@ -9,6 +9,7 @@ class Sum:
     def dp_table_set(self,Item_number,knapsack_weight,value):
         self.dp_table[Item_number][knapsack_weight] = value
         return 0
-    #def dp_max():
+    def dp_max(self):
+        pass
     def maxSum_updata(self):
         pass
