@@ -8,17 +8,17 @@ class Item_list:
     def list_Create(self,input):
         self._item = [0 for i in range(input)]
         return 0
-    def item_list_get(self,Item_number):
+    def list_get(self,Item_number):
         return self._item[Item_number]
 
 
-    def item_list_set(self,item,Item_number):
+    def list_set(self,item,Item_number):
         if Item_number < 0 and (len(self._item)-1) < Item_number:
             return 1
         else:
             self._item[Item_number] = item
             return 0
-    def item_length(self):
+    def list_length(self):
         return len(self._item)
 
 if __name__ == "__main__":

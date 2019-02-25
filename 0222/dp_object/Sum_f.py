@@ -3,7 +3,7 @@
 import item_list_f
 import knapsack_f
 
-class Sum:
+class Dp:
     def __init__(self):
         pass
 
@@ -31,7 +31,7 @@ class Sum:
             print("dp_table_setエラー")
             return 1
     def maxSum_update(self,Item_list,Knapsack):
-        item_list_len = Item_list.item_length()
+        item_list_len = Item_list.list_length()
         max_sum = 0
 
         for i in range(Knapsack.capacity_get() + 1):
@@ -40,7 +40,7 @@ class Sum:
         return max_sum
 
     def dp_max(self,Item_list,Knapsack):
-        item_number = Item_list.item_length()
+        item_number = Item_list.list_length()
 
         knapsack_weight = Knapsack.capacity_get()
 
@@ -48,8 +48,8 @@ class Sum:
 
         for i in range(item_number):
             for j in range(knapsack_weight + 1):
-                Item_list_weight = Item_list.item_list_get(i).weight_get()
-                Item_list_value = Item_list.item_list_get(i).value_get()
+                Item_list_weight = Item_list.list_get(i).weight_get()
+                Item_list_value = Item_list.list_get(i).value_get()
 
                 if Item_list_weight <= j:
                     dp_table_update_value = self.dp_table_get(i,(j - Item_list_weight)) + Item_list_value
