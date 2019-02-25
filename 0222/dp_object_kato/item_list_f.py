@@ -5,19 +5,20 @@ import item_f
 class Item_list:
     def __init__(self):
         pass
-    def list_Create(self,input):
-        self._item = [0 for i in range(input)]
-        return 0
+    def list_create(self,input_list_max):
+        if 1 <= input_list_max and input_list_max <= 100:
+            self._item = [0 for i in range(input_list_max)]
+            return True
+        else:
+            return False
+
     def list_get(self,Item_number):
         return self._item[Item_number]
 
 
     def list_set(self,item,Item_number):
-        if Item_number < 0 and (len(self._item)-1) < Item_number:
-            return 1
-        else:
             self._item[Item_number] = item
-            return 0
+    
     def list_length(self):
         return len(self._item)
 

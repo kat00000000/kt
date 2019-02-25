@@ -1,0 +1,85 @@
+@startuml シーケンス図
+
+Actor "ユーザー" as User
+User -> main: プログラム起動
+User -> main:アイテムの個数の入力（int input_list_max）
+User -> main:ナップサックの容量の個数の入力（int input_capacity）
+
+main -> Knapsack:ナップサックの容量の個数の入力 int capacity_set(int input_capacity)
+main <-- Knapsack: ナップサック容量が1以上100000以下かどうかの判定、 失敗したら返り値がfalse
+
+alt 返り値がfalseだった場合
+    User <- main:print("ナップサックの容量エラー")と表示させる
+    main -> main:プログラムの終了
+end
+
+main -> Item_list: アイテムの個数分のアイテムリストの作成 int list_crate(int input_list_max)
+main <-- Item_list: リストの大きさが1以上100以下かどうかの判定、失敗したら返り値がfalse
+alt 返り値がfalseだった場合
+    User <- main:print("アイテムリスト作成エラー")と表示させる
+    main -> main:プログラムの終了
+end
+
+main -> Item_list: 登録済みのアイテムリストの上限の呼び出し int list_length()
+main <-- Item_list: 登録済みのアイテムリストの上限（アイテムの個数と同じ数値）を取得
+
+loop 入力されたアイテムの個数の数までループ
+   User -> main:ユーザーからアイテムデータ（重さ）登録 (int input_weight)
+    User -> main: ユーザーからアイテムデータ（価値）登録 (int input_value)
+    
+    main -> Item:アイテムクラスの作成 （インスタンス化）
+    main <-- Item:アイテムクラスの取得
+
+    main -> Item: アイテムに価値の登録 int value_set(int input_value)
+    main <-- Item: 価値が1以上1000000000以下かどうかの判定、失敗したら返り値がfalse
+    alt 返り値がfalseだった場合
+        User <- main:print("アイテムの価値登録エラー")と表示させる
+        main -> main:プログラムの終了
+    end
+
+    main -> Item: アイテムに重さの登録 int weight_set(int input_weight)
+    main <-- Item: 重さが1以上ナップサック容量以下かどうかの判定、失敗したら返り値がfalse
+    alt 返り値がfalseだった場合
+        User <- main:print("アイテムの重さ登録エラー")と表示させる
+        main -> main:プログラムの終了
+    end
+
+    main -> Item_list: アイテム情報をリストに登録 int list_set(Item item,int Item_number)
+    main <-- Item_list:　
+end
+
+main -> Dp: int dp_max(Item_list *item_list,Knapsack *knapsack)呼び出し
+
+Dp -> Item_list: アイテムリストの上限（アイテムの個数）の呼び出し int list_length()
+Dp <-- Item_list: アイテムリストの上限の取得
+Dp -> Knapsack:ナップサックの容量呼び出し int capacity_get()
+Knapsack --> Dp: ナップサック容量の取得
+
+Dp -> Dp: dpテーブル作成 int dp_table_create()
+
+loop アイテムの個数未満まで回す(i)
+    loop ナップサックの容量以下まで回す(j)
+        alt jのループがItem_list[i]番目の重さ以上の場合            
+            alt 今回のデータ((dp[i][j-Item_list[i].weight) + Item_list[i].value)が前回のItem_list[i][j]のデータよりも多い場合
+                Dp -> Dp:次のdp[i + 1][j]に今回のデータを入れる
+            else 今回のデータが前回のデータ以下場合
+                Dp -> Dp:次のdpテーブルに前回のデータを入れる
+            end
+        else jのループがitem_list[i]番目の価値よりもしたの場合
+            Dp -> Dp:次のdpテーブルに前回のデータを入れる
+        end
+    end
+end
+
+Dp -> Dp: 最大値(max_sum)まで回す関数（maxSum_update）を呼ぶ。
+
+loop ナップサックの容量未満まで回す(i)
+    alt dpテーブル[item_list_len]行の中の価値が前回までの最大値(max_sum)よりも多い場合
+        Dp -> Dp: maxSumの値を更新
+    end
+end
+
+main <-- Dp: 最大値取得 (max_sum)
+main -> User: 最大値の出力(max_sum)
+
+@enduml

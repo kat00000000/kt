@@ -10,7 +10,7 @@ class Item{
     +int value_get()
     +int value_set(int input_value)
     +int weight_get()
-    +int weight_set(int input_weight)
+    +int weight_set(int input_weight,int input_capacity)
 }
 
 class Item_list{
@@ -31,10 +31,10 @@ class Dp{
 }
 
 class main{
-    -string message
     -int input_capacity
     -int input_list_max
     -int input_value
     -int input_weight
+    -int max_sum
 }
 @enduml

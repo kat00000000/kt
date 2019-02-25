@@ -8,28 +8,14 @@ class Dp:
         pass
 
     def dp_table_get(self,Item_number,knapsack_weight):
-        if Item_number < len(self._dp_table) and 0 <= Item_number:
-            if knapsack_weight < len(self._dp_table[Item_number]) and 0 <= knapsack_weight:
-                return self._dp_table[Item_number][knapsack_weight]
-            else:
-                return 1
-        else:
-            return 1
+        return self._dp_table[Item_number][knapsack_weight]            
 
     def dp_table_create(self):
         self._dp_table = [[0 for i in range(100010)] for j in range(110)]
 
     def dp_table_set(self,Item_number,knapsack_weight,value):
-        if Item_number < len(self._dp_table) and 0 <= Item_number:
-            if knapsack_weight < len(self._dp_table[Item_number]) and 0 <= knapsack_weight:
-                self._dp_table[Item_number][knapsack_weight] = value
-                return 0
-            else:
-                print("dp_table_setエラー")
-                return 1
-        else:
-            print("dp_table_setエラー")
-            return 1
+        self._dp_table[Item_number][knapsack_weight] = value            
+
     def maxSum_update(self,Item_list,Knapsack):
         item_list_len = Item_list.list_length()
         max_sum = 0
