@@ -1,0 +1,38 @@
+@startuml
+class Knapsack{
+    -int capacity
+
+    +int capacity_get()
+    +int capacity_set(int input)
+}
+class Item{
+    -int value_table[]
+    -int weight_table[]
+    -int item_count
+
+    +int item_count_get()
+    +int item_count_set(int _item_count)
+
+    +int value_table_create(int _item_count)
+    +int value_table_get()
+    +int value_table_set(int value, int _item_count)
+    
+    +int value_table_create(int _item_count)
+    +int weight_get()
+    +int weight_set(int weight, int _item_count)
+}
+
+class Dp_funcion{
+    -int _dp_table[][]
+    -int maxvalue
+
+    -int max(int a, int b)
+    -dp_table_create(int capacity, int  item)
+    -int dp_table_get(int item_count, int weight)
+    -int dp_table_update(int item_count, int capacity, int weight_table, int value_table)
+    -int maxvalue_update(int _dp_table,weight, int _item_count, int capacity)
+    +dp_max()
+}
+
+@enduml
+

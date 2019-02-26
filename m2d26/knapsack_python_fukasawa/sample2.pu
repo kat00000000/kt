@@ -1,0 +1,53 @@
+@startuml
+Actor "ユーザー" as user
+
+user -> main: 品物の個数の入力
+main -> Item: 品物の個数登録
+user -> main: ナップサック容量の入力
+main -> Knapsack: ナップサックの容量登録
+main <-- Item: 品物の個数取得
+
+main -> Item: 価値テーブルを作成
+main -> Item: 重さテーブルを作成
+
+loop int i = 0, i < Item -> item_count , i++
+    user -> main: 価値の入力
+    main -> Item: 価値を価値テーブルへ登録
+    user -> main: 重さの入力
+    main -> Item: 重さを重さテーブルへ登録
+end
+
+
+main -> Item: 品物の個数呼び出し
+main <-- Item: 品物の個数取得
+
+main -> Knapsack: ナップサックの容量呼び出し
+main <-- Knapsack: ナップサックの容量取得
+
+main -> main: dpテーブル作成
+
+main -> Item: 価値テーブル呼び出し
+main <-- Item: 価値テーブル取得 
+main -> Item: 重さテーブル呼び出し
+main <-- Item: 重さテーブル取得
+
+main -> Dp_function: dp_max呼び出し
+
+loop int i = 0, i < Item -> count, i++
+    loop int j = 0, j < Knapsack -> capacity + 1, j++
+        alt j >= Knapsack -> capacity
+            Dp_function -> Dp_function: Dp_function -> dp_table[i + 1][j] = Dp_function -> max(Dp_function -> dp_tale[i][j - Item -> weight[i]] + Item -> value[i] , Dp_function -> dp_table[i][j])
+        else
+            Dp_function -> Dp_function: Dp_function -> dp_table[i + 1][j] = Dp_function -> dp_table[i][j]
+        end
+    end
+end
+
+loop int i = 0, i < Knapsack -> capacity, i++
+    Dp_function -> Dp_function: Dp_function -> maxvalue = Dp_function -> max(Dp_function -> dp_table[Item -> item_count][i], Dp_function -> dp[Item -> item_count][i + 1] )
+end
+
+main <-- Dp_function: 最大値取得
+user <-- main: 出力
+
+@enduml
