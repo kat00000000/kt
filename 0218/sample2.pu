@@ -1,5 +1,6 @@
 @startuml
 
+<<<<<<< HEAD
 Actor "ユーザー" as User
 
 User -> main: ナップサックの容量、アイテムの個数の入力
@@ -17,10 +18,20 @@ loop 入力されたアイテムの個数の数までループ
     main <-- Item_list:　成功したかどうかの判定
 end
 main -> Sum: dp_max()呼び出し
+=======
+loop 
+    main -> Item: 数値の入力
+    main <-- Item: 成功したかどうかの判定
+    main -> Item_list: itemの入力
+    main <-- Item_list:　成功したかどうかの判定
+end
+main -> Sum: 呼び出し
+>>>>>>> 自習
 Sum -> Item: 価値呼び出し
 Sum <-- Item: 価値取得
 Sum -> Item: 重さの呼び出し
 Sum <-- Item: 重さ取得
+<<<<<<< HEAD
 Sum -> Knapsack:ナップサックの容量
 Knapsack <-- Sum: 成功したかどうかの判定
 
@@ -36,10 +47,21 @@ loop アイテムの個数まで回す(i)
             end
         else jのループがitem_list[i]番目の数字以下の場合
             Sum -> Sum:次のdpテーブルに前回のデータを入れる
+=======
+
+Sum -> Sum: dpテーブル作成
+loop アイテムの個数まで回す(i)
+    loop ナップサックの重さまで回す(j)
+        alt jのループがItem_list[i]番目の重量を超えた時
+            alt item_list
+                
+            end
+>>>>>>> 自習
         end
     end
 end
 
+<<<<<<< HEAD
 loop ナップサックの容量まで回す(i)
     alt dpテーブル[item_list_len]行の中の数字が前回までの最大値(maxSum)よりも多い場合
         Sum -> Sum: maxSumの値を更新
@@ -48,5 +70,8 @@ end
 
 main <-- Sum: 最大値取得
 main -> User: 結果出力
+=======
+main <-- Sum: 最大値取得
+>>>>>>> 自習
 
 @enduml

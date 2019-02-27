@@ -10,6 +10,7 @@ class Item{
     +int value_get()
     +int value_set(int input)
     +int weight_get()
+<<<<<<< HEAD
     +int weight_set(int input)
 }
 
@@ -26,5 +27,19 @@ class Sum{
     -int dp_table_get(int Item_number,int knapsack_weight)
     -int dp_table_set(int Item_number,int knapsack_weight,int value)
     +int dp_max()
+=======
+    +int weight_set(int i)
+}
+
+class Item_list{
+    -item item[]
+    +item_get(int Item_number)
+    +item_set(Item item)
+}
+
+class Sum{
+    -dp_table[][]
+    +dp
+>>>>>>> 自習
 }
 @enduml

@@ -3,7 +3,10 @@ class item_t:
         self.weight = weight
         self.vallue = vallue
 
-for i in range(3):
-    item = item_t(3,5)
-    itemList.append(item)
-    print(itemList.)
+if __name__ == "__main__":
+    itemList = []
+    loop = 3
+    for i in range(loop):        
+        item = item_t(int(input()),int(input()))
+        itemList.append(item)
+        print(itemList[i].weight,itemList[i].vallue)
