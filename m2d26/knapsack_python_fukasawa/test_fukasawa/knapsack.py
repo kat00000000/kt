@@ -1,15 +1,22 @@
 # coding : utf-8
+import pytest
 
 class Knapsack: #__init__   コンストラクタ、オブジェクトが生成されるときに実行されるメソッド（関数）
     def __init__(self, capacity):    #変数。自分を渡している
-        self._capacity = capacity   #privateの変数は_を付ける
-    
+        if (isinstance(capacity, int)):
+            self._capacity = capacity   #privateの変数は_を付ける
+        else:
+            raise ValueError("error!")
+            #self._capacity = "error"
     #def capacity_check(self):   #メソッドはdef
     #    print (self._capacity)
     def capacity_get(self):
         return self._capacity
     def capacity_set(self,input):
-        self._capacity = input
+        if (isinstance(input, int)):
+            self._capacity = input
+        else:
+            raise ValueError("error!")
 
 if __name__ == "__main__":  
     #クラスのインスタンス化(実体化)
